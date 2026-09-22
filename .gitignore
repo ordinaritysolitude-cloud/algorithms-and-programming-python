@@ -1,0 +1,6 @@
+# Настройки PyCharm (IDE)
+.idea/
+
+# Кэш Python (создается при запуске кода)
+__pycache__/
+*.pyc
