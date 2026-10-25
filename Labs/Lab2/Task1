@@ -1,0 +1,39 @@
+import random
+
+
+def generate_matrix(m, low=-100, high=100):
+    return [[random.randint(low, high) for _ in range(m)] for _ in range(m)]
+
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(' '.join(f'{x:4}' for x in row))
+
+
+def find_saddle_points(matrix):
+    m = len(matrix)
+    row_mins = [min(row) for row in matrix]
+    col_maxs = [max(matrix[i][j] for i in range(m)) for j in range(m)]
+
+    saddle_points = []
+    for i in range(m):
+        for j in range(m):
+            if matrix[i][j] == row_mins[i] and matrix[i][j] == col_maxs[j]:
+                saddle_points.append((i, j, matrix[i][j]))
+    return saddle_points
+
+
+m = int(input("Введите размер матрицы M: "))
+matrix = generate_matrix(m)
+
+print("\nСгенерированная матрица:")
+print_matrix(matrix)
+
+saddle_points = find_saddle_points(matrix)
+
+print("\nРезультат:")
+if saddle_points:
+    for i, j, value in saddle_points:
+        print(f"Седловая точка: индексы ({i}, {j}), значение = {value}")
+else:
+    print("Седловых точек нет.")
